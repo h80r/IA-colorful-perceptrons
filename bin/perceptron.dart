@@ -28,6 +28,7 @@ class Perceptron {
   final double learningRate;
   final double threshold;
   final int maxIterations;
+  int totalIterations = 0;
 
   double evaluate(List<double> input, {bool isLinear = false}) {
     if (input.length != weights.length) {
@@ -45,13 +46,12 @@ class Perceptron {
 
   bool train(
     List<List<double>> trainingData,
-    List<double> target, [
-    int iteration = 0,
-  ]) {
-    if (iteration >= maxIterations) return false;
+    List<double> target,
+  ) {
+    if (totalIterations >= maxIterations) return false;
 
     final results = trainingData.map((e) => evaluate(e)).toList();
-    if (results == target) return true;
+    if (results.isEquals(target)) return true;
 
     for (var i = 0; i < trainingData.length; i++) {
       final error = target[i] - results[i];
@@ -60,6 +60,7 @@ class Perceptron {
       }
     }
 
-    return train(trainingData, target, iteration + 1);
+    totalIterations++;
+    return train(trainingData, target);
   }
 }
