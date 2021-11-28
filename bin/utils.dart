@@ -26,3 +26,17 @@ extension Equalizer on List<List<double>> {
     return true;
   }
 }
+
+String getColor(List<double> output) {
+  final index = output.indexOf(1);
+  return [
+    'Vermelho',
+    'Verde',
+    'Azul',
+    'Preto',
+    'Branco',
+    'Amarelo',
+    'Magenta',
+    'Ciano'
+  ][index];
+}
