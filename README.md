@@ -2,6 +2,10 @@
 
 ## Teste Diagnóstico - Perceptrons
 
+### GitHub
+
+Este projeto pode ser observado no [GitHub](https://github.com/h80r/ia-colorful-perceptrons), onde também está disponível a versão em binário executável do projeto.
+
 ### Objetivo
 
 Implementar computacionalmente uma rede neural perceptron que reconheça as seguintes cores: vermelho, verde, azul, preto, branco, amarelo, magenta e ciano.
