@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:cli_dialog/cli_dialog.dart';
+
 import 'utils.dart';
 
 import 'perceptron.dart';
@@ -28,7 +30,7 @@ class NeuralNetwork {
   final int maxIterations;
   int totalIterations = 0;
 
-  List<double> evaluate(List<double> input) {
+  List<double> evaluate(List<double> input, {bool isDebug = false}) {
     final results = neurons
         .map((e) => e.evaluate(
               input,
@@ -37,10 +39,44 @@ class NeuralNetwork {
         .toList();
     final winnerIndex = results.indexOf(results.reduce(max));
 
-    return List.generate(
+    final parsedResults = List.generate(
       neurons.length,
       (index) => index == winnerIndex ? 1.0 : -1.0,
     );
+
+    if (isDebug) {
+      print('\nEntrada gerada: $input');
+      print('Resultados obtidos:');
+
+      final dialog = CLI_Dialog(
+        listQuestions: [
+          [
+            {
+              'question': 'Qual resultado você deseja observar?',
+              'options': [
+                'Antes da competição',
+                'Depois da competição',
+                'Ambos'
+              ]
+            },
+            'competition'
+          ]
+        ],
+      );
+      final competition = dialog.ask()['competition'];
+
+      for (var i = 0; i < results.length; i++) {
+        if (competition == 'Antes da competição') {
+          print(results[i]);
+        } else if (competition == 'Depois da competição') {
+          print(parsedResults[i]);
+        } else {
+          print('${results[i]} => ${parsedResults[i]}');
+        }
+      }
+    }
+
+    return parsedResults;
   }
 
   void train(List<List<double>> trainingData, List<List<double>> target) {
