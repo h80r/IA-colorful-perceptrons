@@ -2,13 +2,7 @@ import 'neural_network.dart';
 import 'perceptron.dart';
 
 void main(List<String> arguments) {
-  final network = NeuralNetwork(
-    inputSize: 3,
-    neuronCount: 8,
-    learningRate: 0.01,
-  );
-
-  network.train([
+  final trainingData = <List<double>>[
     [1, -1, -1],
     [-1, 1, -1],
     [-1, -1, 1],
@@ -17,7 +11,9 @@ void main(List<String> arguments) {
     [1, 1, -1],
     [1, -1, 1],
     [-1, 1, 1]
-  ], [
+  ];
+
+  final expectedOutput = [
     [1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0],
     [-1.0, 1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0],
     [-1.0, -1.0, 1.0, -1.0, -1.0, -1.0, -1.0, -1.0],
@@ -26,7 +22,15 @@ void main(List<String> arguments) {
     [-1.0, -1.0, -1.0, -1.0, -1.0, 1.0, -1.0, -1.0],
     [-1.0, -1.0, -1.0, -1.0, -1.0, -1.0, 1.0, -1.0],
     [-1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, 1.0]
-  ]);
+  ];
+
+  final network = NeuralNetwork(
+    inputSize: 3,
+    neuronCount: 8,
+    learningRate: 0.12345,
+  );
+
+  network.train(trainingData, expectedOutput);
 
   print(network.evaluate([-1, -1, -1]));
 }
