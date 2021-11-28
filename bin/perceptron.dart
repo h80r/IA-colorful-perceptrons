@@ -44,6 +44,12 @@ class Perceptron {
     return result >= threshold ? 1 : -1;
   }
 
+  void adjustWeights(List<double> input, double error) {
+    for (var index = 0; index < weights.length; index++) {
+      weights[index] += learningRate * error * input[index];
+    }
+  }
+
   bool train(
     List<List<double>> trainingData,
     List<double> target,
@@ -55,9 +61,7 @@ class Perceptron {
 
     for (var i = 0; i < trainingData.length; i++) {
       final error = target[i] - results[i];
-      for (var w = 0; w < weights.length; w++) {
-        weights[w] += learningRate * error * trainingData[i][w];
-      }
+      adjustWeights(trainingData[i], error);
     }
 
     totalIterations++;
