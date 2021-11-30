@@ -27,6 +27,10 @@ extension Equalizer on List<List<double>> {
   }
 }
 
+double normalizeHex(int value) {
+  return (value / 255) * 2 - 1;
+}
+
 String getColor(List<double> output) {
   final index = output.indexOf(1);
   return [
