@@ -32,7 +32,6 @@ double normalizeHex(int value) {
 }
 
 String getColor(List<double> output) {
-  final index = output.indexOf(1);
   return [
     'Vermelho',
     'Verde',
@@ -42,5 +41,5 @@ String getColor(List<double> output) {
     'Amarelo',
     'Magenta',
     'Ciano'
-  ][index];
+  ][output.indexOf(1)];
 }
